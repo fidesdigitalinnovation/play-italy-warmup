@@ -38,7 +38,7 @@ plugins:
   - serverless-esbuild
   - serverless-iam-roles-per-function
   - serverless-export-env
-  - serverless-layers
+  # - serverless-layers
   # - serverless-plugin-ifelse
   
 
@@ -72,12 +72,12 @@ resources:
             AttributeType: S
           - AttributeName: sk
             AttributeType: S
-    DependenciesBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: warmup-amplify-dependencies
-        PublicAccessBlockConfiguration:
-          BlockPublicAcls: true
-          BlockPublicPolicy: true
-          IgnorePublicAcls: true
-          RestrictPublicBuckets: true
+    # DependenciesBucket:
+    #   Type: AWS::S3::Bucket
+    #   Properties:
+    #     BucketName: warmup-amplify-dependencies
+    #     PublicAccessBlockConfiguration:
+    #       BlockPublicAcls: true
+    #       BlockPublicPolicy: true
+    #       IgnorePublicAcls: true
+    #       RestrictPublicBuckets: true
