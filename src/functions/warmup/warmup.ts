@@ -22,6 +22,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
                                 console.log(`${project.url} := ${_occurrency}`)
                             }),catchError((e) => {
                                 console.log(e);
+                                console.log('chiamata in errore');
                                 return of(false)
                             }))
                 }), toArray())
