@@ -60,7 +60,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
     functionality: 'Details',
     projectName: 'Play Italy',
     page: 'Details',
-    url: 'https://release-1-0.d15g1m0bgzxfo4.amplifyapp.com//detail/640f4f13eb4b22063254d3e7/florence-great-art-crafts-4-days-3-nights',
+    url: 'https://release-1-0.d15g1m0bgzxfo4.amplifyapp.com/detail/640f4f13eb4b22063254d3e7/florence-great-art-crafts-4-days-3-nights',
     concurrency: 1
   })
   await ProjectEntity.put({
@@ -117,6 +117,14 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
     projectName: 'Play Italy',
     page: 'User Page',
     url: 'https://release-1-0.d15g1m0bgzxfo4.amplifyapp.com/user-page',
+    concurrency: 1
+  })
+  await ProjectEntity.put({
+    project: 'Play Italy',
+    functionality: 'Search Tour',
+    projectName: 'Play Italy',
+    page: 'Search Tour',
+    url: 'https://release-1-0.d15g1m0bgzxfo4.amplifyapp.com/tours-destinations?tourType=&destination=Milan',
     concurrency: 1
   })
 
