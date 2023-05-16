@@ -45,8 +45,8 @@ jobs:
       - name: Install global
         run: npm install -g serverless@2.23.0
 
-      - name: Upload Lambda Layer
-        run: npm run lamba-layer-uat
+      # - name: Upload Lambda Layer
+      #   run: npm run lamba-layer-uat
   
       - name: Deploy UAT
         run: npm run sls deploy -- --stage=uat
