@@ -1,0 +1,83 @@
+service:
+  name: test-serverless
+frameworkVersion: '2'
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: 'eu-west-1'
+  timeout: 300
+  environment:
+    WARMUP_SINGLE_TABLE: !Ref WarmupTable
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Make sure AWS-SDK reuses HTTP connections
+
+package:
+  exclude:
+    - package-lock.json
+    - package.json
+ 
+functions:
+  warmupTrigger:
+     handler: src/functions/warmup/warmup.handler
+     events: 
+      - schedule: cron(0/5 9-20 * * ? *) # 5 mins past the hour every hour     
+     iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:*
+        Resource: !GetAtt WarmupTable.Arn
+  initialLoadTrigger:
+     handler: src/functions/warmup/initial-load.handler
+    #  events:
+    #   - schedule: cron(5 * * * ? *) # 5 mins past the hour every hour     
+     iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:*
+        Resource: !GetAtt WarmupTable.Arn
+      
+plugins:
+  - serverless-esbuild
+  - serverless-iam-roles-per-function
+  - serverless-export-env
+  - serverless-layers
+  # - serverless-plugin-ifelse
+  
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude:
+      - 'aws-sdk'
+    target: 'node14'
+    define: 
+      'require.resolve': undefined
+    platform: 'node'
+  serverless-layers:
+    layersDeploymentBucket: !GetAtt DependenciesBucket.BucketName 
+    
+resources:
+  Resources:
+    WarmupTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+    DependenciesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: warmup-amplify-dependencies
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
