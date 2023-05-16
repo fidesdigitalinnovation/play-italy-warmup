@@ -1,0 +1,52 @@
+name: deploy UAT
+on:
+  push:
+    branches: [ 'release/**' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_UAT_TMP }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_UAT_TMP }}
+      AWS_DEFAULT_REGION: eu-west-1
+      STAGE: 'uat'
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      # - name: setup-docker
+      #   uses: docker-practice/actions-setup-docker@1.0.11
+
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "14"
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_UAT_TMP }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_UAT_TMP }}
+          aws-region: eu-west-1
+
+
+      - name: npm ci
+        run: npm ci
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install global
+        run: npm install -g serverless@2.23.0
+
+      - name: Upload Lambda Layer
+        run: npm run lamba-layer-uat
+  
+      - name: Deploy UAT
+        run: npm run sls deploy -- --stage=uat
