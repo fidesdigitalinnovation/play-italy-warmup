@@ -6,7 +6,6 @@ import { ProjectEntity } from "src/entity/project.entity";
 import { IProject } from "src/model/project.model";
 import axios from "axios";
 
-
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
 
     await lastValueFrom(from(ProjectEntity.query(buildEntityPK(EntityType[EntityType.PROJECT], 'Play Italy'), {
