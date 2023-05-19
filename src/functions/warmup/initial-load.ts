@@ -95,6 +95,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
     url: 'https://release-1-0.d15g1m0bgzxfo4.amplifyapp.com/404',
     concurrency: 1
   })
+  
   await ProjectEntity.put({
     project: 'Play Italy',
     functionality: '500',
