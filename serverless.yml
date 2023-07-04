@@ -10,7 +10,7 @@ provider:
   environment:
     WARMUP_SINGLE_TABLE: !Ref WarmupTable
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Make sure AWS-SDK reuses HTTP connections
-    BASE_PATH: https://main.d2l181o1v8eq5g.amplifyapp.com/'
+    BASE_PATH: https://main.d2l181o1v8eq5g.amplifyapp.com/
 
 package:
   exclude:
@@ -39,7 +39,7 @@ plugins:
   - serverless-esbuild
   - serverless-iam-roles-per-function
   - serverless-export-env
-  - serverless-layers
+  # - serverless-layers
   # - serverless-plugin-ifelse
   
 
@@ -54,8 +54,8 @@ custom:
     define: 
       'require.resolve': undefined
     platform: 'node'
-  serverless-layers:
-    layersDeploymentBucket: !GetAtt DependenciesBucket.BucketName 
+  # serverless-layers:
+  #   layersDeploymentBucket: !GetAtt DependenciesBucket.BucketName 
     
 resources:
   Resources:
@@ -76,7 +76,7 @@ resources:
     DependenciesBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: warmup-amplify-dependencies
+        BucketName: warmup-amplify-dependencies-prod
         PublicAccessBlockConfiguration:
           BlockPublicAcls: true
           BlockPublicPolicy: true

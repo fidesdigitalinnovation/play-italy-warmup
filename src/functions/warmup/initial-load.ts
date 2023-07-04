@@ -55,7 +55,96 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         url: `${basePath}faq`,
         concurrency: 1
       })
-   
+
+    await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'Contacts',
+        projectName: 'Play Italy',
+        page: 'FAQ',
+        url: `${basePath}contacts`,
+        concurrency: 1
+      })
+
+    await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'ITALIAN_STORIES',
+        projectName: 'Play Italy',
+        page: 'ITALIAN_STORIES',
+        url: `${basePath}italian-stories`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'ITALIAN_STORIES',
+        projectName: 'Play Italy',
+        page: 'ITALIAN_STORIES',
+        url: `${basePath}italian-stories`,
+        concurrency: 1
+      })
+    
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'ITALIAN_STORIES_ID',
+        projectName: 'Play Italy',
+        page: 'ITALIAN_STORIES_ID',
+        url: `${basePath}italian-stories/11`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'TERMS',
+        projectName: 'Play Italy',
+        page: 'TERMS',
+        url: `${basePath}info/terms`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'PRIVACY',
+        projectName: 'Play Italy',
+        page: 'PRIVACY',
+        url: `${basePath}info/privacy`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: '500',
+        projectName: 'Play Italy',
+        page: '500',
+        url: `${basePath}500`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: '404',
+        projectName: 'Play Italy',
+        page: '404',
+        url: `${basePath}404`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'Booking',
+        projectName: 'Play Italy',
+        page: 'Booking',
+        url: `${basePath}booking`,
+        concurrency: 1
+      })
+
+      await ProjectEntity.put({
+        project: 'Play Italy',
+        functionality: 'USER_PAGE',
+        projectName: 'Play Italy',
+        page: 'USER_PAGE',
+        url: `${basePath}user-page`,
+        concurrency: 1
+      })
 
     return {
         statusCode: 200,
