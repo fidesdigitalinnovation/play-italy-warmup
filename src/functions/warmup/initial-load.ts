@@ -3,7 +3,7 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import { ProjectEntity } from "src/entity/project.entity";
 
 
-
+const basePath = process.env.BASE_PATH
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
 
     console.log(EntityType[EntityType.PROJECT]);
@@ -12,7 +12,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         functionality: 'HOME PAGE',
         projectName: 'Play ITALY',
         page: 'HOME PAGE',
-        url: 'https://develop.d2i5dn5rckqlbl.amplifyapp.com/',
+        url: basePath,
         concurrency: 2
       })
     await ProjectEntity.put({
@@ -20,7 +20,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         functionality: 'SEARCH ',
         projectName: 'Play Italy',
         page: 'SEARCH',
-        url: 'https://develop.d2i5dn5rckqlbl.amplifyapp.com/tours-destinations?tourType=&destination=',
+        url: `${basePath}tours-destinations?tourType=&destination=`,
         concurrency: 2
       })
     await ProjectEntity.put({
@@ -28,7 +28,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         functionality: 'DETAIL',
         projectName: 'Play Italy',
         page: 'DETAIL',
-        url: 'https://develop.d2i5dn5rckqlbl.amplifyapp.com/detail/641c77c0792306719b04f48e/the-best-of-sorrento-the-amalfi-coast?isPremium=false',
+        url: `${basePath}detail/641c77c0792306719b04f48e/the-best-of-sorrento-the-amalfi-coast?isPremium=false`,
         concurrency: 2
       })
     await ProjectEntity.put({
@@ -36,7 +36,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         functionality: 'PLAY_WITH_US',
         projectName: 'Play Italy',
         page: 'PLAY_WITH_US',
-        url: 'https://develop.d2i5dn5rckqlbl.amplifyapp.com/play-with-us',
+        url: `${basePath}play-with-us`,
         concurrency: 2
       })
     await ProjectEntity.put({
@@ -44,7 +44,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         functionality: 'PLAY_WITH_US',
         projectName: 'Play Italy',
         page: 'PLAY_WITH_US',
-        url: 'https://develop.d2i5dn5rckqlbl.amplifyapp.com/play-with-us',
+        url: `${basePath}play-with-us`,
         concurrency: 2
       })
     await ProjectEntity.put({
@@ -52,7 +52,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
         functionality: 'FAQ',
         projectName: 'Play Italy',
         page: 'FAQ',
-        url: 'https://develop.d2i5dn5rckqlbl.amplifyapp.com/faq',
+        url: `${basePath}faq`,
         concurrency: 1
       })
    

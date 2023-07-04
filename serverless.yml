@@ -10,6 +10,7 @@ provider:
   environment:
     WARMUP_SINGLE_TABLE: !Ref WarmupTable
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Make sure AWS-SDK reuses HTTP connections
+    BASE_PATH: https://main.d2l181o1v8eq5g.amplifyapp.com/'
 
 package:
   exclude:
